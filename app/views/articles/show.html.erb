@@ -1,0 +1,6 @@
+<h1>show article of particular id</h1>
+<p><strong>title:<%=@article.title%></strong></p>
+<p><strong>Description:<%=@article.description%></strong></strong></p>
+<button><%= link_to "Back", articles_path %></button> 
+<button><%= link_to "Edit", edit_article_path(@article) %></button> 
+<button><%= link_to "Delete", article_path(@article), method: :delete, data:{confirm:'are you sure you want to delete'} %></button>
