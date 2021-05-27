@@ -17,5 +17,6 @@
     "@types/bootstrap": "^5.0.15",
     "bootstrap-sass": "^3.4.1",
     "webpack-dev-server": "^3.11.2"
-  }
+  },
+  "stylePreprocessorOptions": { "includePaths": ["node_modules"] }
 }
