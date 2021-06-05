@@ -1,0 +1,13 @@
+<h1 class="text-center mt-4"><%= @user.username %>'s profile</h1>
+<%= gravatar_for(@user,size:200) %>
+<%if logged_in? && create_user == @user %>
+<%= link_to "Edit your profile", edit_user_path(@user) , class:"mx-auto btn btn-outline-info mt-4" %>
+<%end%>
+<h3 class="text-center mt-4">Articles</h3>
+<div class="flickr_pagination mb-4">
+    <%= will_paginate @articles, :container => false %>
+</div>
+<%= render 'articles/article'%>
+<div class="flickr_pagination mb-4">
+    <%= will_paginate @articles, :container => false %>
+</div>
