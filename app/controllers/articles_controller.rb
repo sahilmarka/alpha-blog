@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show,:edit,:update,:destroy]
+    before_action :require_user, except: [:show,:index]
+    before_action :require_same_user, only: [:edit,:update,:destroy]
 
     def show
     end
@@ -14,7 +16,7 @@ class ArticlesController < ApplicationController
  
     def create
         @article = Article.new(white_list_article)
-        @article.user_id = create_user.id
+        @article.user_id = current_user.id
         if @article.save
         flash[:notice] = 'article created successfully'
         redirect_to @article
@@ -50,5 +52,11 @@ class ArticlesController < ApplicationController
     def white_list_article
         params.require(:article).permit(:title,:description)
     end
-        
+
+    def require_same_user 
+        if current_user!=@article.user && !current_user.admin?
+          flash[:alert] = "cannot edit articles of others"
+          redirect_to @article 
+        end
+    end   
 end
